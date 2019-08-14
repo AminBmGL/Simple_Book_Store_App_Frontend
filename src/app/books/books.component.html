@@ -1,0 +1,42 @@
+
+
+
+<div class="row">
+  <div class="col-4">
+      <div class="sticky-top">
+          <div class="list-group">
+              
+              <a 
+                *ngFor="let b of availableBooks " 
+                class="list-group-item list-group-item-action"
+                [class.active]="activeBook.id === b.id"
+                (click)="activeBook=b"
+                >
+                {{ b.nom }}
+              </a>
+              <button class="btn btn-primary mt-2" *ngIf="!displayNonAvailableBooks " (click)="displayNonAvailableBooks=!displayNonAvailableBooks">
+                Display non available books
+              </button>
+              <div *ngIf="displayNonAvailableBooks ">
+                  <a 
+                  *ngFor="let b of nonAvailableBooks " 
+                  class="list-group-item list-group-item-action"
+                  [class.active]="activeBook.id === b.id"
+                  (click)="activeBook=b"
+
+                  >
+                  {{ b.nom }}
+                </a>
+              </div>
+            </div>
+        </div>
+  </div>
+  <div class="col">
+    <div class="row" *ngIf="cart">
+          <div class="col">
+            <app-book-details [book]="activeBook" [shoppingCart]="cart"></app-book-details>
+          </div>
+      </div>
+  </div>
+</div>
+

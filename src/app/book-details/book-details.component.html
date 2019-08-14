@@ -1,0 +1,16 @@
+<div *ngIf="book" class="card">
+    <div class="card-body">
+      <h4 class="card-title">Nom du livre: {{ book.nom }}</h4>
+      <h4 class="card-text">Genre :{{book.genre}}</h4>
+      <p class="card-text">Prix:{{ book.prix }}  </p>
+    </div>
+    <div *ngIf="shoppingCart" class="card-footer">
+      <button 
+        *ngIf="book.quantity === 0; else updateQuantity"
+        (click)="addToCart()"
+        class="btn btn-secondary btn-block">Add to Cart</button>
+      <ng-template #updateQuantity>
+        <app-book-quantity [book]="book" [shoppingCart]="shoppingCart" [quantity]="book.quantity"> </app-book-quantity>
+      </ng-template>
+    </div>
+  </div>    
